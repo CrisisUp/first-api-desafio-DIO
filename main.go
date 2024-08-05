@@ -75,11 +75,16 @@ func DeletePerson(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	router := mux.NewRouter()
-	people = append(people, person{ID: "1", Firstname: "John", Lastname: "Doe", Address: &address{City: "City X", State: "State X"}})
-	people = append(people, person{ID: "2", Firstname: "Koko", Lastname: "Doe", Address: &address{City: "City Z", State: "State Z"}})
+
+	people = append(people, person{ID: "1", Firstname: "John", Lastname: "Doe", Address: &address{City: "Cidade A", State: "Estado A"}})
+	people = append(people, person{ID: "2", Firstname: "Koko", Lastname: "Doe", Address: &address{City: "Cidade B", State: "Estado B"}})
+	people = append(people, person{ID: "3", Firstname: "Maria", Lastname: "da Silva", Address: &address{City: "Cidade C", State: "Estado C"}})
+	people = append(people, person{ID: "4", Firstname: "João", Lastname: "da Silva", Address: &address{City: "Cidade D", State: "Estado D"}})
+
 	router.HandleFunc("/contato", GetPeople).Methods("GET")
 	router.HandleFunc("/contato/{id}", GetPerson).Methods("GET")
 	router.HandleFunc("/contato/{id}", CreatePerson).Methods("POST")
 	router.HandleFunc("/contato/{id}", DeletePerson).Methods("DELETE")
+
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
